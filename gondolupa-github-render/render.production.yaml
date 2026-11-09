@@ -1,0 +1,23 @@
+# Configuración opcional: requiere un servicio pago y aprobación del titular en Render.
+services:
+  - type: web
+    name: gondolupa
+    runtime: node
+    plan: starter
+    buildCommand: pnpm install --frozen-lockfile && pnpm test
+    startCommand: pnpm start
+    autoDeployTrigger: "off"
+    healthCheckPath: /healthz
+    disk:
+      name: gondolupa-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /var/data
+      - key: BACKGROUND_REFRESH
+        value: "true"

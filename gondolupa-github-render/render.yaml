@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: gondolupa
+    runtime: node
+    plan: free
+    buildCommand: pnpm install --frozen-lockfile && pnpm test
+    startCommand: pnpm start
+    autoDeployTrigger: "off"
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: HOST
+        value: 0.0.0.0
+      - key: BACKGROUND_REFRESH
+        value: "true"
